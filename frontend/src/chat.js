@@ -7,7 +7,7 @@ function Chat() {
 
   const handleSend = async () => {
   if (!message) return;
-  const currentMessage = message;
+  //const currentMessage = message;
 
   /* ✅ CLEAR IMMEDIATELY */
   setMessage("");
