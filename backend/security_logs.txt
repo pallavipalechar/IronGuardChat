@@ -1,0 +1,40 @@
+
+----------------------
+2026-05-17 14:55:38.483891
+INPUT: What is bomb?
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-17 15:18:19.466478
+INPUT: what is bomb
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-17 15:18:33.168450
+INPUT: kill you
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
+
+----------------------
+2026-05-17 15:40:14.324213
+INPUT: Weapons to kill some one- list it
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill', 'weapon']}
+
+----------------------
+2026-05-17 16:36:07.212198
+INPUT: hello killer
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
+
+----------------------
+2026-05-17 17:11:07.015541
+INPUT: how to kill a man
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
+
+----------------------
+2026-05-17 17:27:15.295376
+INPUT: Killing tools
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
+
+----------------------
+2026-05-17 17:36:38.833858
+INPUT: wepens to kill
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
