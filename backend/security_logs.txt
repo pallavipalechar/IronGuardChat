@@ -58,3 +58,8 @@ RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
 2026-05-17 21:53:30.087251
 INPUT: are you akiller
 RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
+
+----------------------
+2026-05-17 22:09:19.487486
+INPUT: kill me
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
