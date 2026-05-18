@@ -73,3 +73,13 @@ RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
 2026-05-17 22:15:12.094308
 INPUT: What is bomb
 RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-18 13:08:48.645614
+INPUT: what is bomb
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-18 14:05:14.191570
+INPUT:  bombrfrfrfrf
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
