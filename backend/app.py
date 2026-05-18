@@ -18,7 +18,7 @@ CORS(app)
 # ----------------------------
 chatbot = pipeline(
     "text-generation",
-    model="gpt2-medium"
+    model="google/flan-t5-small"
 )
 
 # ----------------------------
@@ -113,11 +113,8 @@ def chat():
 
     # Step 3: Safe AI response
     try:
-        result = chatbot(user_message, max_length=50)
-        return jsonify({
-            "response": result[0]["generated_text"],
-            "risk_analysis": risk
-        })
+       result = chatbot(user_message)
+       return jsonify({"response": result[0]["generated_text"]})
 
     except Exception as e:
         return jsonify({"error": str(e)})

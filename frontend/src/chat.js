@@ -6,37 +6,34 @@ function Chat() {
   const [chat, setChat] = useState([]);
 
   const handleSend = async () => {
-  if (!message) return;
-  //const currentMessage = message;
+    if (!message) return;
+setMessage("");
+    const userMsg = { role: "user", text: message };
+    setChat((prev) => [...prev, userMsg]);
 
-  /* ✅ CLEAR IMMEDIATELY */
-  setMessage("");
-  const userMsg = { role: "user", text: message };
+    try {
+      const res = await sendMessage(message);
 
-  setChat((prev) => [...prev, userMsg]);
+      const botMsg = {
+        role: "bot",
+        text: res.data.response,
+        risk: res.data.risk_analysis,
+      };
 
-  try {
-    const res = await sendMessage(message);
+      setChat((prev) => [...prev, botMsg]);
+    } catch (error) {
+      setChat((prev) => [
+        ...prev,
+        { role: "bot", text: "Error connecting to server" },
+      ]);
+    }
 
-    const botMsg = {
-      role: "bot",
-      text: res.data.response,
-    };
-
-    setChat((prev) => [...prev, botMsg]);
-
-  } catch (error) {
-
-    console.log(error);
-  }
-
-  setMessage("");
-};
+    setMessage("");
+  };
 
   return (
     <div className="chat-container">
-    
-
+     
       <div className="chat-box">
         {chat.map((c, i) => (
           <div
@@ -61,10 +58,10 @@ function Chat() {
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={(e) => {
           if (e.key === "Enter") {
-          handleSend();
+           handleSend();
     }
   }}
-  placeholder="Type your message..."
+          placeholder="Type your message..."
         />
         <button onClick={handleSend}>Send</button>
       </div>

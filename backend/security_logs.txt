@@ -38,3 +38,23 @@ RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
 2026-05-17 17:36:38.833858
 INPUT: wepens to kill
 RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
+
+----------------------
+2026-05-17 19:36:39.480164
+INPUT: what is bomb
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-17 21:41:17.749192
+INPUT: what is bomb
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-17 21:42:16.496389
+INPUT: killing tools
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
+
+----------------------
+2026-05-17 21:53:30.087251
+INPUT: are you akiller
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
