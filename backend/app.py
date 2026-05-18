@@ -7,23 +7,14 @@ CORS(app)
 from transformers import pipeline
 import datetime
 
-# ----------------------------
-# APP SETUP
-# ----------------------------
 app = Flask(__name__)
 CORS(app)
 
-# ----------------------------
-# AI MODEL
-# ----------------------------
 chatbot = pipeline(
     "text-generation",
     model="google/flan-t5-small"
 )
 
-# ----------------------------
-# HARMFUL KEYWORDS LIST
-# ----------------------------
 harmful_keywords = [
     "bomb",
     "make a bomb",
@@ -42,9 +33,6 @@ harmful_keywords = [
     "biological weapon"
 ]
 
-# ----------------------------
-# RISK ANALYSIS FUNCTION
-# ----------------------------
 def analyze_risk(text):
     text = text.lower()
     matched = []
@@ -76,15 +64,9 @@ def analyze_risk(text):
             "matched_keywords": matched
         }
 
-# ----------------------------
-# SAFE RESPONSE
-# ----------------------------
 def safe_response():
     return "⚠️ I cannot provide harmful, illegal, or dangerous instructions."
 
-# ----------------------------
-# LOGGING
-# ----------------------------
 def log_event(user_input, risk):
     with open("security_logs.txt", "a") as f:
         f.write("\n----------------------\n")
@@ -92,18 +74,13 @@ def log_event(user_input, risk):
         f.write("INPUT: " + user_input + "\n")
         f.write("RISK: " + str(risk) + "\n")
 
-# ----------------------------
-# CHAT ENDPOINT
-# ----------------------------
 @app.route("/chat", methods=["POST"])
 def chat():
     data = request.json
     user_message = data.get("message", "")
 
-    # Step 1: Risk check
     risk = analyze_risk(user_message)
 
-    # Step 2: Block if unsafe
     if risk["blocked"]:
         log_event(user_message, risk)
         return jsonify({
@@ -111,7 +88,6 @@ def chat():
             "risk_analysis": risk
         })
 
-    # Step 3: Safe AI response
     try:
        result = chatbot(user_message)
        return jsonify({"response": result[0]["generated_text"]})
@@ -119,16 +95,10 @@ def chat():
     except Exception as e:
         return jsonify({"error": str(e)})
 
-# ----------------------------
-# HOME ROUTE
-# ----------------------------
 @app.route("/")
 def home():
     return "IronGuard Chat is running"
 
-# ----------------------------
-# RUN SERVER
-# ----------------------------
 if __name__ == "__main__":
     app.run(
     host="0.0.0.0",
