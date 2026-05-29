@@ -1,16 +1,19 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 import datetime
 
 app = Flask(__name__)
 CORS(app)
 
-MODEL_NAME = "sshleifer/tiny-t5"
+MODEL_NAME = "distilgpt2"
 
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
-model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
+model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
+
+if tokenizer.pad_token is None:
+    tokenizer.pad_token = tokenizer.eos_token
 
 harmful_keywords = [
     "bomb",
@@ -49,7 +52,7 @@ def analyze_risk(text):
             "matched_keywords": []
         }
 
-    if score <= 2:
+    elif score <= 2:
         return {
             "risk_level": "MEDIUM",
             "blocked": True,
@@ -87,7 +90,7 @@ def chat():
 
         if not data:
             return jsonify({
-                "error": "No JSON data received"
+                "error": "No JSON body received"
             }), 400
 
         user_message = data.get("message", "").strip()
@@ -107,8 +110,10 @@ def chat():
                 "risk_analysis": risk
             })
 
+        prompt = f"User: {user_message}\nAssistant:"
+
         inputs = tokenizer(
-            user_message,
+            prompt,
             return_tensors="pt",
             truncation=True,
             max_length=128
@@ -118,13 +123,21 @@ def chat():
             outputs = model.generate(
                 **inputs,
                 max_new_tokens=50,
-                do_sample=False
+                do_sample=True,
+                temperature=0.7,
+                top_p=0.9,
+                pad_token_id=tokenizer.eos_token_id
             )
 
-        response = tokenizer.decode(
+        generated_text = tokenizer.decode(
             outputs[0],
             skip_special_tokens=True
         )
+
+        if "Assistant:" in generated_text:
+            response = generated_text.split("Assistant:", 1)[1].strip()
+        else:
+            response = generated_text.strip()
 
         return jsonify({
             "response": response,
