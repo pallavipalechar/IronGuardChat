@@ -1,15 +1,16 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from transformers import pipeline
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+import torch
 import datetime
 
 app = Flask(__name__)
 CORS(app)
 
-chatbot = pipeline(
-    "text2text-generation",
-    model="google/flan-t5-small"
-)
+MODEL_NAME = "google/flan-t5-small"
+
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
 
 harmful_keywords = [
     "bomb",
@@ -34,7 +35,8 @@ def analyze_risk(text):
     text = text.lower()
 
     matched = [
-        keyword for keyword in harmful_keywords
+        keyword
+        for keyword in harmful_keywords
         if keyword in text
     ]
 
@@ -46,18 +48,19 @@ def analyze_risk(text):
             "blocked": False,
             "matched_keywords": []
         }
-    elif score <= 2:
+
+    if score <= 2:
         return {
             "risk_level": "MEDIUM",
             "blocked": True,
             "matched_keywords": matched
         }
-    else:
-        return {
-            "risk_level": "HIGH",
-            "blocked": True,
-            "matched_keywords": matched
-        }
+
+    return {
+        "risk_level": "HIGH",
+        "blocked": True,
+        "matched_keywords": matched
+    }
 
 
 def safe_response():
@@ -83,12 +86,16 @@ def chat():
         data = request.get_json()
 
         if not data:
-            return jsonify({"error": "No JSON data received"}), 400
+            return jsonify({
+                "error": "No JSON data received"
+            }), 400
 
         user_message = data.get("message", "").strip()
 
         if not user_message:
-            return jsonify({"error": "Message cannot be empty"}), 400
+            return jsonify({
+                "error": "Message cannot be empty"
+            }), 400
 
         risk = analyze_risk(user_message)
 
@@ -100,14 +107,27 @@ def chat():
                 "risk_analysis": risk
             })
 
-        result = chatbot(
+        inputs = tokenizer(
             user_message,
-            max_new_tokens=50,
-            do_sample=False
+            return_tensors="pt",
+            truncation=True,
+            max_length=128
+        )
+
+        with torch.no_grad():
+            outputs = model.generate(
+                **inputs,
+                max_new_tokens=50,
+                do_sample=False
+            )
+
+        response = tokenizer.decode(
+            outputs[0],
+            skip_special_tokens=True
         )
 
         return jsonify({
-            "response": result[0]["generated_text"],
+            "response": response,
             "risk_analysis": risk
         })
 
