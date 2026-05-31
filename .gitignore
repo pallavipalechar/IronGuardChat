@@ -1,0 +1,22 @@
+# Python
+venv/
+backend/venv/
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# OS
+.DS_Store
+
+# Node (if any)
+node_modules/
+
+# PyTorch / ML heavy files
+*.pt
+*.pth
+*.bin
+
+# IDE
+.vscode/
