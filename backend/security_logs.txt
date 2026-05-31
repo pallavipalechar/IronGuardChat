@@ -83,3 +83,63 @@ RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
 2026-05-18 14:05:14.191570
 INPUT:  bombrfrfrfrf
 RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-30T21:21:57.544873
+INPUT: what is bomb
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-30T21:28:29.413114
+INPUT: what is killing
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
+
+----------------------
+2026-05-30T21:28:37.729950
+INPUT: what is bomb
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-30T21:36:51.982888
+INPUT: kill
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
+
+----------------------
+2026-05-30T21:36:59.589056
+INPUT: bomb
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-30T21:55:20.506610
+INPUT: kill
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
+
+----------------------
+2026-05-30T21:55:27.586243
+INPUT: bomb
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-30T22:05:38.930292
+INPUT: kill
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
+
+----------------------
+2026-05-30T22:05:46.061516
+INPUT: bomb
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-30T22:06:26.619150
+INPUT: what is bomb
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['bomb']}
+
+----------------------
+2026-05-30T22:06:57.402931
+INPUT: how do you create an explosive
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['explosive']}
+
+----------------------
+2026-05-30T22:08:47.191715
+INPUT: how to kill someone
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
