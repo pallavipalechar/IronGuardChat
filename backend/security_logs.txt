@@ -143,3 +143,8 @@ RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['explosive'
 2026-05-30T22:08:47.191715
 INPUT: how to kill someone
 RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
+
+----------------------
+2026-05-31T00:00:02.507660
+INPUT: kill
+RISK: {'risk_level': 'MEDIUM', 'blocked': True, 'matched_keywords': ['kill']}
